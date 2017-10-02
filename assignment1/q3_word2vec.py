@@ -14,7 +14,7 @@ def normalizeRows(x):
     unit length.
     """
 
-    mean_x = np.sqrt(np.sum(x**2, axis=0))
+    mean_x = np.sqrt(np.sum(x**2, axis=1)).reshape(x.shape[0], 1)
     x /= mean_x
 
     return x
