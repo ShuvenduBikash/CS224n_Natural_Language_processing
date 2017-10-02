@@ -14,7 +14,7 @@ def normalizeRows(x):
     unit length.
     """
 
-    mean_x = np.mean(x, axis=1).reshape(x.shape[0], 1)
+    mean_x = np.sqrt(np.sum(x**2, axis=0))
     x /= mean_x
 
     return x
@@ -200,7 +200,7 @@ def test_word2vec():
     def getRandomContext(C):
         tokens = ["a", "b", "c", "d", "e"]
         return tokens[random.randint(0,4)], \
-            [tokens[random.randint(0,4)] for i in xrange(2*C)]
+            [tokens[random.randint(0,4)] for i in range(2*C)]
     dataset.sampleTokenIdx = dummySampleTokenIdx
     dataset.getRandomContext = getRandomContext
 
