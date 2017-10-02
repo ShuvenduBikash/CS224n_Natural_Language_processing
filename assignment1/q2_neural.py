@@ -24,6 +24,7 @@ def forward_backward_prop(data, labels, params, dimensions):
     """
 
     ### Unpack network parameters (do not modify)
+    N = data.shape[0]
     ofs = 0
     Dx, H, Dy = (dimensions[0], dimensions[1], dimensions[2])
 
@@ -41,13 +42,21 @@ def forward_backward_prop(data, labels, params, dimensions):
     Z2 = np.dot(A1, W2) + b2
     A2 = softmax(Z2)
     
+    cost = - np.sum(labels * np.log(A2)) / N
+    
+    
     
     #backward propagation
     dZ2 = A2 - labels
     dh = np.dot(dZ2, W2.T)
     dZ1 = dh * sigmoid_grad(Z1)
     
+    gradW1 = np.dot(dZ1, W1.T) / N
+    gradb1 = np.sum(dZ1) / N
+    gradW2 = np.dot(dZ2, W2.T) / N
+    gradb2 = np.sum(dZ2) / N
     
+        
 
     ### Stack gradients (do not modify)
     grad = np.concatenate((gradW1.flatten(), gradb1.flatten(),
