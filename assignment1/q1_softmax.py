@@ -30,8 +30,11 @@ def softmax(x):
 
     if len(x.shape) > 1:
         # Matrix
+        M, N = orig_shape[0], orig_shape[1]
+        maxm = np.max(x, axis=1).reshape(M, 1)
+        x = x - maxm
         x = np.exp(x)
-        sum = np.sum(x, axis=0)
+        sum = np.sum(x, axis=1).reshape(M, 1)
         x /= sum
     else:
         # Vector
