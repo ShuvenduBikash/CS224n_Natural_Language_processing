@@ -138,6 +138,10 @@ def skipgram(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
     for context_word in contextWords:
         target = tokens[context_word]
         cur_cost, cur_grad_predicted, cur_grad_out = word2vecCostAndGradient(inputVectors[center], target, outputVectors, dataset)
+        
+        cost += cur_cost
+        gradIn[center] += cur_grad_predicted
+        gradOut += cur_grad_out
 
     return cost, gradIn, gradOut
 
