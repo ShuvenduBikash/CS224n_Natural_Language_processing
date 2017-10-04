@@ -56,9 +56,14 @@ def softmaxCostAndGradient(predicted, target, outputVectors, dataset):
     assignment!
     """
 
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    assert predicted.shape[-1] == outputVectors.shape[-1]
+    scaler_products = np.dot(outputVectors, predicted) #np.sum(outputVectors* predicted, axis=1)
+    yhat = softmax(scaler_products)
+    cost = -np.log(yhat[target])
+    
+    gradPred = np.sum(outputVectors * yhat[:, np.newaxis], axis=0) - outputVectors[target]
+    grad = yhat[:, np.newaxis] * predicted[np.newaxis, :]
+    grad[target] = grad[target] - predicted
 
     return cost, gradPred, grad
 
@@ -67,7 +72,7 @@ def getNegativeSamples(target, dataset, K):
     """ Samples K indexes which are not the target """
 
     indices = [None] * K
-    for k in xrange(K):
+    for k in range(K):
         newidx = dataset.sampleTokenIdx()
         while newidx == target:
             newidx = dataset.sampleTokenIdx()
@@ -129,9 +134,10 @@ def skipgram(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
     gradIn = np.zeros(inputVectors.shape)
     gradOut = np.zeros(outputVectors.shape)
 
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
+    center = tokens[currentWord]
+    for context_word in contextWords:
+        target = tokens[context_word]
+        cur_cost, cur_grad_predicted, cur_grad_out = word2vecCostAndGradient(inputVectors[center], target, outputVectors, dataset)
 
     return cost, gradIn, gradOut
 
@@ -172,7 +178,7 @@ def word2vec_sgd_wrapper(word2vecModel, tokens, wordVectors, dataset, C,
     N = wordVectors.shape[0]
     inputVectors = wordVectors[:N/2,:]
     outputVectors = wordVectors[N/2:,:]
-    for i in xrange(batchsize):
+    for i in range(batchsize):
         C1 = random.randint(1,C)
         centerword, context = dataset.getRandomContext(C1)
 
