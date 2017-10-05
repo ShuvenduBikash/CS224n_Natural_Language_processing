@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import numpy as np
 import random
 
@@ -61,7 +59,7 @@ def softmaxCostAndGradient(predicted, target, outputVectors, dataset):
     yhat = softmax(scaler_products)
     cost = -np.log(yhat[target])
     
-    gradPred = np.sum(outputVectors * yhat[:, np.newaxis], axis=0) - outputVectors[target]
+    gradPred = np.dot(yhat, outputVectors) - outputVectors[target]
     grad = yhat[:, np.newaxis] * predicted[np.newaxis, :]
     grad[target] = grad[target] - predicted
 
@@ -236,6 +234,10 @@ def test_word2vec():
     print ("\n=== Results ===")
     print (skipgram("c", 3, ["a", "b", "e", "d", "b", "c"],
         dummy_tokens, dummy_vectors[:5,:], dummy_vectors[5:,:], dataset))
+    
+    # Assigning values for debug
+    currentWord, C, contextWords, tokens, inputVectors, outputVectors,dataset = ("c", 3, ["a", "b", "e", "d", "b", "c"], dummy_tokens, dummy_vectors[:5,:], dummy_vectors[5:,:], dataset)
+        
     print (skipgram("c", 1, ["a", "b"],
         dummy_tokens, dummy_vectors[:5,:], dummy_vectors[5:,:], dataset,
         negSamplingCostAndGradient))
