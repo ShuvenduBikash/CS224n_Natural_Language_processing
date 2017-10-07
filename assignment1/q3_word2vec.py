@@ -92,16 +92,19 @@ def negSamplingCostAndGradient(predicted, target, outputVectors, dataset,
     Arguments/Return Specifications: same as softmaxCostAndGradient
     """
 
-    # Sampling of indices is done for you. Do not modify this if you
-    # wish to match the autograder and receive points!
-    indices = [target]
-    indices.extend(getNegativeSamples(target, dataset, K))
-
-    ### YOUR CODE HERE
-    raise NotImplementedError
-    ### END YOUR CODE
-
+    negative_samples = [dataset.sampleTokenIdx() for k in range(K)]
+    cost = -np.log(sigmoid(np.dot(outputVectors[target], predicted))) \
+           -sum(np.log(sigmoid(-np.dot(outputVectors[k], predicted)))
+                for k in negative_samples)
+    gradPred = (sigmoid(np.dot(outputVectors[target], predicted)) - 1.0) * outputVectors[target] + \
+                sum((1.0 - sigmoid(-np.dot(outputVectors[k], predicted))) * outputVectors[k]
+                    for k in negative_samples)
+    grad = np.zeros_like(outputVectors)
+    grad[target] += (sigmoid(np.dot(outputVectors[target], predicted)) - 1.0) * predicted
+    for k in negative_samples:
+      grad[k] += (1.0 - sigmoid(-np.dot(outputVectors[k], predicted))) * predicted
     return cost, gradPred, grad
+
 
 
 def skipgram(currentWord, C, contextWords, tokens, inputVectors, outputVectors,
