@@ -93,4 +93,4 @@ def load_training_data():
 
     train_data = list(zip(X_p, y_p))
 
-    return train_data, word2index, index2word
+    return train_data, word2index, index2word, vocab
