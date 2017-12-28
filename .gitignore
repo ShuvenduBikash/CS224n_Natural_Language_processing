@@ -3,5 +3,6 @@ data/
 dataset/
 __pycache__/
 .idea/
-
+.ipnb_checkpoints/
+.ipnb_checkpoint/
 
