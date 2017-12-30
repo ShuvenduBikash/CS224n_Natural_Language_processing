@@ -5,4 +5,5 @@ __pycache__/
 .idea/
 .ipnb_checkpoints/
 .ipnb_checkpoint/
+.ipynb_checkpoints
 
