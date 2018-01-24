@@ -7,5 +7,6 @@ The code used deep earning libraries. Here is some basics for understanding of t
 # Implementations 
 Here are some of the algorithm used in natural language processing based on deep learning algorithms.
 
-- [Skip Gram](skip-gram)
+- Word2Vec [Skip Gram](Word2Vec/skip-gram) [GloVe](Word2Vec/GloVe)
+
 
