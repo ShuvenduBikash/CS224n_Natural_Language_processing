@@ -2,6 +2,7 @@
 ### Basics of NLP
 The code used deep earning libraries. Here is some basics for understanding of those library
 - [NLP in Pytorch](basics/NLP_pytorch.ipynb)
+- [RNN usages](rnn)
 
 
 # Implementations 
