@@ -78,7 +78,7 @@ for epoch in range(100):
         label=label.view(1)
         loss += criterion(output, label)
 
-    print(", epoch: %d, loss: %1.3f" % (epoch + 1, loss.data[0]))
+    print(", epoch: %d, loss: %1.3f" % (epoch + 1, loss.item()))
 
     loss.backward()
     optimizer.step()
