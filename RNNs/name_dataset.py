@@ -5,10 +5,17 @@ from torch.utils.data import Dataset, DataLoader
 import csv
 import gzip
 
+
+# define root datadir
+if os.path.exists('E:/Datasets'):
+    root = 'E:/Datasets'
+else:
+    root = 'C:/Users/user/Documents/datasets'
+
 class NameDataset(Dataset):
 
     def __init__(self, train=True):
-        file_name = 'E:/Datasets/NLP_data/names_train.csv.gz' if train else 'E:/Datasets/NLP_data/names_test.csv.gz'
+        file_name = root+'/NLP_data/names_train.csv.gz' if train else root+'/NLP_data/names_test.csv.gz'
         with gzip.open(file_name, 'rt') as f:
             reader = csv.reader(f)
             rows = list(reader)
@@ -43,8 +50,8 @@ if __name__ == '__main__':
     print(dataset.get_country_id('Korean'))
 
     train_loader = DataLoader(dataset=dataset,
-                                batch_size=10,
-                                shuffle=True)
+                              batch_size=10,
+                              shuffle=True)
     print(len(train_loader.dataset))
     for epoch in range(2):
         for i, (names, countries) in enumerate(train_loader):
