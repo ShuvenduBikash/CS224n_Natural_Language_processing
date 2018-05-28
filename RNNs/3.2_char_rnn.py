@@ -46,7 +46,7 @@ def string2index(string):
     tensor = torch.LongTensor(tensor)
 
     if torch.cuda.is_available():
-        tensor = tensor.cuda()
+        tensor = tensor = tensor.cuda()
 
     return Variable(tensor)
     
