@@ -4,7 +4,7 @@ from torch.autograd import Variable
 from torch.utils.data import Dataset, DataLoader
 import csv
 import gzip
-
+import os
 
 # define root datadir
 if os.path.exists('E:/Datasets'):
