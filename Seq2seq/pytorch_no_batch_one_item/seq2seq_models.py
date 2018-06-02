@@ -29,7 +29,7 @@ class EncoderRNN(nn.Module):
     def __init__(self, input_size, hidden_size, num_layers=1):
         super(EncoderRNN, self).__init__()
         self.hidden_size = hidden_size
-        self.num_layers = num_layers
+        self.n_layers = num_layers
 
         self.embedding = nn.Embedding(input_size, hidden_size)
         self.gru = nn.GRU(hidden_size, hidden_size, num_layers)
