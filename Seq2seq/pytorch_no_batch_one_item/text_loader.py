@@ -5,9 +5,11 @@ import os
 # define root datadir
 if os.path.exists('E:/Datasets'):
     root = 'E:/Datasets'
-else:
+elif os.path.exists('C:/Users/user/Documents/datasets'):
     root = 'C:/Users/user/Documents/datasets'
-
+else:
+    root = '.'
+    
     
 class TextDataset(Dataset):
     
