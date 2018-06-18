@@ -73,9 +73,10 @@ def test():
             
     token = torch.zeros(1, BATCH_SIZE)
     for c in range(Ty):
-        output, hidden = decoder(token, hidden)  # (1, 64, 11)
-        token = output.argmax(2)                 # (1, 64)
+        output, hidden = decoder(token, hidden)                    # (1, 64, 11)
+        token = output.cpu().data.numpy().argmax(2)                # (1, 64)
         translate += dataset.inv_machine_vocab[token[0, 0].item()]
+        token = torch.from_numpy(token)
         
     print(translate)
         
@@ -123,7 +124,6 @@ if __name__ == '__main__':
                 test()
                 continue
                 
-            
             encoder_outputs, encoder_hidden = encoder(src)    
             target = cuda_variable(target.transpose(0, 1).type(torch.LongTensor))    # (10, 64)
             
@@ -131,7 +131,7 @@ if __name__ == '__main__':
             loss = 0
             
             for c in range(Ty):
-                token = target[c-1] if c else torch.zeros(1, BATCH_SIZE)
+                token = target[c-1].data if c else torch.zeros(1, BATCH_SIZE)
                 output, hidden = decoder(token, hidden)
                 loss += criterion(output[0], target[c])
             
@@ -146,16 +146,3 @@ if __name__ == '__main__':
                 print('[(%d %d%%) %.4f]' %
                       (epoch, epoch / N_EPOCH * 100, loss))
                 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
