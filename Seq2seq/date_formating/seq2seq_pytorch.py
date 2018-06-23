@@ -3,10 +3,19 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 from torch.utils.data import Dataset, DataLoader
+from tensorboardX import SummaryWriter
+
+CUDA = torch.cuda.is_available()
+# CUDA = False
+
+
+def visualize_graph(model, data, comment):
+    with SummaryWriter(comment=comment) as writer:
+        writer.add_graph(model, data)
 
 
 def cuda_variable(tensor):
-    if torch.cuda.is_available():
+    if CUDA:
         return Variable(tensor.cuda())
     else:
         return Variable(tensor)
@@ -58,7 +67,7 @@ class DecoderRNN(nn.Module):
         return output, hidden_decoder
 
 
-def test():
+def translate():
     translate = ''
     src, _ = next(iter(train_loader))
     encoder_outputs, encoder_hidden = encoder(src)
@@ -97,6 +106,7 @@ if __name__ == '__main__':
     train_loader = DataLoader(dataset=dataset,
                               batch_size=BATCH_SIZE,
                               shuffle=True)  # (64, 30)
+    sample_x, sample_y = next(iter(train_loader))
 
     # define input output shape
     INPUT_SIZE = dataset.input_length  # number of unique char in input    (37)
@@ -105,12 +115,14 @@ if __name__ == '__main__':
     encoder = EncoderRNN(INPUT_SIZE, HIDDEN_SIZE)
     decoder = DecoderRNN(HIDDEN_SIZE, OUTPUT_SIZE)
 
-    if torch.cuda.is_available():
+    if CUDA:
         encoder = encoder.cuda()
         decoder = decoder.cuda()
 
     print("Encoder : \n", encoder)
     print("Decoder : \n", decoder)
+
+    # visualize_graph(encoder, sample_x, '_encoder')
 
     params = list(encoder.parameters()) + list(decoder.parameters())
     optimizer = torch.optim.Adam(params)
@@ -122,7 +134,7 @@ if __name__ == '__main__':
         for i, (src, target) in enumerate(train_loader):  # (64, 30) & (64, 10)
 
             if src.size()[0] != BATCH_SIZE:
-                test()
+                translate()
                 continue
 
             encoder_outputs, encoder_hidden = encoder(src)
