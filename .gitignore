@@ -7,4 +7,4 @@ __pycache__/
 .ipnb_checkpoint/
 .ipynb_checkpoints
 saved_models
-glove.840B.300d.txt
+glove.840B.300d.txt*
