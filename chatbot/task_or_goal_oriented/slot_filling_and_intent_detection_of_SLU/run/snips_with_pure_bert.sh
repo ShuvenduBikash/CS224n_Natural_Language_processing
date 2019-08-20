@@ -27,3 +27,6 @@ device=0
 experiment_output_path=exp
 
 python scripts/slot_tagging_and_intent_detection_with_pure_transformer.py --task_st $task_slot_filling --task_sc $task_intent_detection --dataset $dataset --dataroot $dataroot --lr $learning_rate --dropout $dropout_rate --batchSize $batch_size --optim $optimizer --max_norm $max_norm_of_gradient_clip --experiment $experiment_output_path --deviceId $device --max_epoch $max_epoch --st_weight ${balance_weight} --pretrained_model_type ${pretrained_model_type} --pretrained_model_name ${pretrained_model_name}
+
+
+# python scripts/slot_tagging_and_intent_detection_with_pure_transformer.py --task_st NN --task_sc CLS --dataset snips --dataroot data/snips --lr 5e-5 --dropout 0.1 --batchSize 32 --optim bertadam --max_norm 1 --experiment exp --deviceId 0 --max_epoch 30 --st_weight 0.5 --pretrained_model_type bert --pretrained_model_name bert-base-cased

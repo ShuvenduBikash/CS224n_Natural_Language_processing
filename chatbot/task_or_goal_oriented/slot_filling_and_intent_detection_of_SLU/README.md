@@ -9,6 +9,7 @@
  <img src="./figs/data_annotation_ATIS.png" width="750" alt="data annotation"/>
 
 ## Setup
+ * LINUX (mandatory)
  * python 3.6.x
  * [pytorch](https://pytorch.org/) 1.1
  * pip install gpustat     [if gpu is used]
