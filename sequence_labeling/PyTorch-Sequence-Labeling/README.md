@@ -8,13 +8,12 @@ If you're new to PyTorch, first read [Deep Learning with PyTorch: A 60 Minute Bl
 
 Questions, suggestions, or corrections can be posted as issues.
 
+## Requirements
 I'm using `PyTorch 0.4` in `Python 3.6`.
 
 ---
 
-**27 Feb 2019**: [a PyTorch Tutorial to Object Detection](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection) is now complete.
 
----
 
 # Contents
 

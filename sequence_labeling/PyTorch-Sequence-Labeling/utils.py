@@ -227,7 +227,7 @@ def load_embeddings(emb_file, word_map, expand_vocab=True):
 
     # Read embedding file
     print("\nLoading embeddings...")
-    for line in open(emb_file, 'r'):
+    for line in open(emb_file, 'r', encoding='utf8'):
         line = line.split(' ')
 
         emb_word = line[0]
