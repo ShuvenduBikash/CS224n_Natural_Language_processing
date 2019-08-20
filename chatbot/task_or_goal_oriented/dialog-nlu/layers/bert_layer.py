@@ -4,7 +4,7 @@
 """
 
 import tensorflow as tf
-import tensorflow.python.keras.backend as K
+from tensorflow.python.keras import backend as K
 import tensorflow_hub as hub
 
 
