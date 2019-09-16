@@ -37,7 +37,9 @@ class Corpus(object):
         # Tokenize file content
         with open(path, 'r', encoding="utf8") as f:
             idss = []
+            # for i in range(100):
             for line in f:
+                # line = f.read()
                 words = line.split() + ['<eos>']
                 ids = []
                 for word in words:

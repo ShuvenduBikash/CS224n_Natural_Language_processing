@@ -10,3 +10,4 @@ saved_models
 glove.840B.300d.txt*
 *.tar
 wandb/
+*.pt
