@@ -11,3 +11,4 @@ glove.840B.300d.txt*
 *.tar
 wandb/
 *.pt
+.data/

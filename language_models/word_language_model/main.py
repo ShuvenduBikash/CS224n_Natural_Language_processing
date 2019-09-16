@@ -11,7 +11,7 @@ import data
 import model
 
 parser = argparse.ArgumentParser(description='PyTorch Wikitext-2 RNN/LSTM Language Model')
-parser.add_argument('--data', type=str, default='./data/wikitext-2',
+parser.add_argument('--data', type=str, default='./data/bn',
                     help='location of the data corpus')
 parser.add_argument('--model', type=str, default='LSTM',
                     help='type of recurrent net (RNN_TANH, RNN_RELU, LSTM, GRU, Transformer)')
@@ -102,6 +102,10 @@ if args.model == 'Transformer':
     model = model.TransformerModel(ntokens, args.emsize, args.nhead, args.nhid, args.nlayers, args.dropout).to(device)
 else:
     model = model.RNNModel(args.model, ntokens, args.emsize, args.nhid, args.nlayers, args.dropout, args.tied).to(device)
+
+if os.path.exists('model.pt'):
+    with open('model.pt', 'rb') as f:
+        model = torch.load(f)
 
 criterion = nn.CrossEntropyLoss()
 
