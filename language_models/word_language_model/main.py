@@ -233,6 +233,8 @@ try:
 except KeyboardInterrupt:
     print('-' * 89)
     print('Exiting from training early')
+    with open(args.save, 'wb') as f:
+        torch.save(model, f)
 
 # Load the best saved model.
 with open(args.save, 'rb') as f:

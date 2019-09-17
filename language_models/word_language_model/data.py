@@ -87,7 +87,7 @@ class Corpus(object):
             self.dictionary.add_word('।')
             self.dictionary.add_word('!')
             self.dictionary.add_word('-')
-            with open(os.path.join(path, 'crawled_words.txt'), 'r', encoding="utf8") as f:
+            with open(os.path.join(path, 'unigram_5lkh.txt'), 'r', encoding="utf8") as f:
                 for line in f:
                     try:
                         w, _ = line.split(' ')
